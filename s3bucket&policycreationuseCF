@@ -1,0 +1,60 @@
+s3bucket policy with yaml
+
+Resources:
+  S3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join 
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref S3Bucket
+                - /*
+      Bucket: !Ref S3Bucket
+
+
+s3bucket with yaml
+
+
+[10:42 AM] Sikesh Purushothaman
+AWSTemplateFormatVersion: 2010-09-09
+Resources:
+  s345465:
+    Type: 'AWS::S3::Bucket'
+    Properties: {}
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 10384abb-a57a-4a16-be1f-ed28794545d0
+
+s3bucket with json
+
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "s345465": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {},
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "10384abb-a57a-4a16-be1f-ed28794545d0"
+                }
+            }
+        }
+    }
+}
+
